@@ -1,0 +1,18 @@
+{
+  "name": "cs471-project",
+  "version": "0.0.1",
+  "description": "Class Project for Kettering University's CS471 class",
+  "main": "index.js",
+  "scripts": {
+    "start": "serve src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/techno11/cs471-project"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
