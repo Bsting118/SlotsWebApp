@@ -12,22 +12,11 @@ const firebaseConfig = {
   projectId: "slots-web-app-simulator",
   storageBucket: "slots-web-app-simulator.appspot.com",
   messagingSenderId: "956456255033",
-  appId: "1:956456255033:web:e0d4efd7fc8e18cb1117e8"
+  appId: "1:956456255033:web:e0d4efd7fc8e18cb1117e8",
 };
-
 
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-
-/*======================== SOREN ZAISER'S FIREBASE ========================*/
-/*const firebaseApp = firebase.initializeApp({
-  apiKey: "AIzaSyCFIQT8YT3SsUxOGW9RpetzO1pi8AFKJ7Q",
-  authDomain: "cs471-class-project.firebaseapp.com",
-  projectId: "cs471-class-project",
-  storageBucket: "cs471-class-project.appspot.com",
-  messagingSenderId: "814184501691",
-  appId: "1:814184501691:web:26a1bf75e0b5f02cb6b49e",
-});*/
 const db = firebaseApp.firestore();
 const auth = firebaseApp.auth();
 // =============================================================
@@ -304,7 +293,9 @@ async function removeCreditsBet(numOfBetCreditsToRemove) {
     .collection("users")
     .doc(user.uid)
     .update({
-      creditsBet: firebase.firestore.FieldValue.increment(-numOfBetCreditsToRemove),
+      creditsBet: firebase.firestore.FieldValue.increment(
+        -numOfBetCreditsToRemove
+      ),
     });
 }
 
@@ -359,7 +350,9 @@ async function removeCreditsWon(numOfWonCreditsToRemove) {
     .collection("users")
     .doc(user.uid)
     .update({
-      creditsWon: firebase.firestore.FieldValue.increment(-numOfWonCreditsToRemove),
+      creditsWon: firebase.firestore.FieldValue.increment(
+        -numOfWonCreditsToRemove
+      ),
     });
 }
 

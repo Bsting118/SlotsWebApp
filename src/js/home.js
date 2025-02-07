@@ -60,19 +60,19 @@ var SymbolPays = {
   Cherry: DEFAULT_PAYS_CHERRY,
   Chips: DEFAULT_PAYS_CHIPS,
   Gem: DEFAULT_PAYS_GEM,
-  Wild: DEFAULT_PAYS_WILDCARD
-}
+  Wild: DEFAULT_PAYS_WILDCARD,
+};
 
 // ================================================================
 
 // ===================== Global Arrays/Lists: =====================
 // These indicies should match the Results enum
 const Images = [
-  "assets/icons/Stylized_7.png",
-  "assets/icons/Stylized_BAR.png",
-  "assets/icons/Stylized_Cherry.png",
-  "assets/icons/Stylized_Chips.png",
-  "assets/icons/Stylized_GEM.png",
+  "/src/assets/icons/Stylized_7.png",
+  "/src/assets/icons/Stylized_BAR.png",
+  "/src/assets/icons/Stylized_Cherry.png",
+  "/src/assets/icons/Stylized_Chips.png",
+  "/src/assets/icons/Stylized_GEM.png",
 ];
 
 // How many times a symbol should appear within the RNG's set:
@@ -89,51 +89,45 @@ var activeWilds = [Results.Cherry];
 // ================================================================
 
 // -----------------------------------------------------------------------
-function getNumOfActiveReels()
-{
+function getNumOfActiveReels() {
   const currentAmtOfReels = numOfActiveReels;
   return currentAmtOfReels;
 }
 
-function permutateOdds(inputOdds, numOfOccurences)
-{
+function permutateOdds(inputOdds, numOfOccurences) {
   var result = Math.pow(inputOdds, numOfOccurences);
   return result;
 }
 
-function roundToPrecision(value, decimalCount)
-{
+function roundToPrecision(value, decimalCount) {
   const pow = Math.pow(10, decimalCount);
   return Math.round((value + Number.EPSILON) * pow) / pow;
 }
 
-async function setupPage() 
-{
+async function setupPage() {
   const credits = await getCredits();
   document.getElementById("credits").innerText = credits;
 }
 
-function doesntHaveEnoughCredits(amountBeingBet, creditsInAccount)
-{
+function doesntHaveEnoughCredits(amountBeingBet, creditsInAccount) {
   const numBet = parseInt(amountBeingBet);
-  const numCredits = parseInt(creditsInAccount)
+  const numCredits = parseInt(creditsInAccount);
 
-  const notEnoughCredits = (numBet > numCredits) ? true : false;
+  const notEnoughCredits = numBet > numCredits ? true : false;
 
   return notEnoughCredits;
 }
 
-function getCurrentBet()
-{
-  let activeBetButtonText = document.querySelector(".bet_button.active").innerText;
+function getCurrentBet() {
+  let activeBetButtonText =
+    document.querySelector(".bet_button.active").innerText;
   const betNum = parseInt(activeBetButtonText);
 
   // Return the value of the bet (as an int):
   return betNum;
 }
 
-async function hasInvalidCreditsForBet(betAmount)
-{
+async function hasInvalidCreditsForBet(betAmount) {
   const credits = await getCredits();
   const insufficientCredits = doesntHaveEnoughCredits(betAmount, credits);
   console.log("HAS INSUFFICIENT CREDITS? ==> " + insufficientCredits);
@@ -141,17 +135,18 @@ async function hasInvalidCreditsForBet(betAmount)
   return insufficientCredits;
 }
 
-async function gambleBetCredits(betAmount, payoutOfSpin)
-{
+async function gambleBetCredits(betAmount, payoutOfSpin) {
   await processSpin(betAmount, payoutOfSpin);
   const newCredits = await getCredits();
 
   // Give the temporary animation of subtracting their credits as they bet:
-  let subtractedCredits = parseInt(document.getElementById("credits").innerText)
+  let subtractedCredits = parseInt(
+    document.getElementById("credits").innerText
+  );
   subtractedCredits -= betAmount;
   document.getElementById("credits").innerText = subtractedCredits;
 
-  // Return the processed amount after gambling: 
+  // Return the processed amount after gambling:
   return newCredits;
 }
 
@@ -160,13 +155,12 @@ async function updateCreditsWon(amountWonOnSpin) {
 
   // Call the API to get the new amount added to the payout:
   const newAccountCredits = await getCredits();
-  
+
   document.getElementById("creditsWon").innerText = newCreditsWon;
   document.getElementById("credits").innerText = newAccountCredits;
 }
 
-function updatePerSymbolFrequencies()
-{
+function updatePerSymbolFrequencies() {
   // Re-assign:
   PerSymbolFrequencies = [
     RANDOM_LIMIT * PerSymbolOdds.Seven, // 0th = 7's
@@ -177,14 +171,19 @@ function updatePerSymbolFrequencies()
   ];
 }
 
-function multiplyPays()
-{
-  document.getElementById("seven_set_value").innerText = SymbolPays.Seven * currentBet;
-  document.getElementById("gem_set_value").innerText = SymbolPays.Gem * currentBet;
-  document.getElementById("chips_set_value").innerText = SymbolPays.Chips * currentBet;
-  document.getElementById("bar_set_value").innerText = SymbolPays.Bar * currentBet;
-  document.getElementById("cherry_set_value").innerText = SymbolPays.Cherry * currentBet;
-  document.getElementById("cherry_value").innerText = SymbolPays.Wild * currentBet;
+function multiplyPays() {
+  document.getElementById("seven_set_value").innerText =
+    SymbolPays.Seven * currentBet;
+  document.getElementById("gem_set_value").innerText =
+    SymbolPays.Gem * currentBet;
+  document.getElementById("chips_set_value").innerText =
+    SymbolPays.Chips * currentBet;
+  document.getElementById("bar_set_value").innerText =
+    SymbolPays.Bar * currentBet;
+  document.getElementById("cherry_set_value").innerText =
+    SymbolPays.Cherry * currentBet;
+  document.getElementById("cherry_value").innerText =
+    SymbolPays.Wild * currentBet;
 }
 
 function checkOutputForMatches(
@@ -213,29 +212,28 @@ function checkOutputForMatches(
 
       if (matchCounter >= minNumOfMatches) {
         const symbolThatMatched = outputArray[0];
-        switch(true)
-        {
+        switch (true) {
           case symbolThatMatched == Results.Seven:
             // Get payout amount for triple 7s
-            winAmount = document.getElementById('seven_set_value').innerText;
+            winAmount = document.getElementById("seven_set_value").innerText;
             break;
           case symbolThatMatched == Results.Bar:
             // Get payout amount for triple Bars
-            winAmount = document.getElementById('bar_set_value').innerText;
+            winAmount = document.getElementById("bar_set_value").innerText;
             break;
           case symbolThatMatched == Results.Cherry:
             // Get payout amount for triple Cherries
-            winAmount = document.getElementById('cherry_set_value').innerText;
+            winAmount = document.getElementById("cherry_set_value").innerText;
             break;
           case symbolThatMatched == Results.Chips:
             // Get payout amount for triple Chips
-            winAmount = document.getElementById('chips_set_value').innerText;
+            winAmount = document.getElementById("chips_set_value").innerText;
             break;
           case symbolThatMatched == Results.Gem:
             // Get payout amount for triple Gems
-            winAmount = document.getElementById('gem_set_value').innerText;
+            winAmount = document.getElementById("gem_set_value").innerText;
             break;
-          default: 
+          default:
             // Unknown pay symbol; set to nothing:
             winAmount = 0;
             break;
@@ -249,7 +247,7 @@ function checkOutputForMatches(
 
               for (let indexJ = 0; indexJ < numOfReels; indexJ++) {
                 if (outputArray[indexJ] == currentWild) {
-                  winAmount = document.getElementById('cherry_value').innerText;
+                  winAmount = document.getElementById("cherry_value").innerText;
                   result = true;
                 }
               }
@@ -264,8 +262,7 @@ function checkOutputForMatches(
   return result;
 }
 
-async function removeUserCredits(amtToRemove)
-{
+async function removeUserCredits(amtToRemove) {
   await removeCredits(amtToRemove);
   const newAccountCredits = await getCredits();
   document.getElementById("credits").innerText = newAccountCredits;
@@ -325,8 +322,7 @@ function sumSetToIndex(set, index) {
 }
 
 // Reset the slot machine to its default state:
-function resetSlotsUI()
-{
+function resetSlotsUI() {
   // Re-enable buttons
   $(".button_container_2 > button").attr("disabled", false);
   $(".button_container_3 > button").attr("disabled", false);
@@ -357,17 +353,14 @@ async function spin1() {
   var cantSpin = await hasInvalidCreditsForBet(currentBet);
 
   // After validation results come back in, check if they can/cannot spin:
-  if (cantSpin)
-  {
+  if (cantSpin) {
     document.getElementById("credits_error_msg").style.display = "block";
     // Timeout for 1 second for cool-down:
     setTimeout(() => {
       resetSlotsUI();
     }, 2000);
     return;
-  }
-  else
-  {
+  } else {
     console.log("\nBet of " + currentBet + " cr. is valid! Good luck!");
   }
 
@@ -399,8 +392,15 @@ async function spin1() {
 
   // Algorithm should record output to this array
   console.log(
-    "Output: " + "[" + output[0] + ", " + output[1] + ", " + output[2] + "]"
-    + "\n{(0 -> Seven), (4 -> Gem), (3 -> Chip), (1 -> Bar), (2 -> Cherry)}"
+    "Output: " +
+      "[" +
+      output[0] +
+      ", " +
+      output[1] +
+      ", " +
+      output[2] +
+      "]" +
+      "\n{(0 -> Seven), (4 -> Gem), (3 -> Chip), (1 -> Bar), (2 -> Cherry)}"
   );
 
   var isPayout = checkOutputForMatches(
@@ -423,8 +423,7 @@ async function spin1() {
         const slot = document.getElementById(`reel-img-${i}`);
         slot.src = newRandomImage(slot.src);
       }
-    } 
-    else if (Date.now() - start < 2000) {
+    } else if (Date.now() - start < 2000) {
       // Set first slot to the first result
       if (!isSet[0]) {
         setFinal(0, output[0]);
@@ -471,11 +470,10 @@ async function spin1() {
           spread: 70,
           origin: { y: 0.6 },
         });
-        
+
         //The User has won
         updateWins();
-      }
-      else {
+      } else {
         //The User has lost
         updateLosses();
       }
@@ -511,17 +509,14 @@ async function spin2() {
   console.log("Can user spin? ==> " + cantSpin);
 
   // After validation results come back in, check if they can/cannot spin:
-  if (cantSpin)
-  {
+  if (cantSpin) {
     console.log("INVALID BET! NOT ENOUGH CREDITS!");
     // Timeout for 1 second for cool-down:
     setTimeout(() => {
       resetSlotsUI();
     }, 1000);
     return;
-  }
-  else
-  {
+  } else {
     console.log("\nBet of " + currentBet + " cr. is valid! Good luck!");
   }
 
@@ -534,16 +529,20 @@ async function spin2() {
     console.log("Generated the following for reel " + i + ": " + rand);
 
     switch (true) {
-      case (rand < PerSymbolOdds.Seven):
+      case rand < PerSymbolOdds.Seven:
         output2[i - 1] = Results.Seven;
         break;
-      case (rand < PerSymbolOdds.Seven + PerSymbolOdds.Gem):
+      case rand < PerSymbolOdds.Seven + PerSymbolOdds.Gem:
         output2[i - 1] = Results.Gem;
         break;
-      case (rand < PerSymbolOdds.Seven + PerSymbolOdds.Gem + PerSymbolOdds.Chips):
+      case rand < PerSymbolOdds.Seven + PerSymbolOdds.Gem + PerSymbolOdds.Chips:
         output2[i - 1] = Results.Chips;
         break;
-      case (rand < PerSymbolOdds.Seven + PerSymbolOdds.Gem + PerSymbolOdds.Chips + PerSymbolOdds.Bar):
+      case rand <
+        PerSymbolOdds.Seven +
+          PerSymbolOdds.Gem +
+          PerSymbolOdds.Chips +
+          PerSymbolOdds.Bar:
         output2[i - 1] = Results.Bar;
         break;
       default:
@@ -553,8 +552,15 @@ async function spin2() {
 
   // Algorithm should record output to this array
   console.log(
-    "Output: " + "[" + output2[0] + ", " + output2[1] + ", " + output2[2] + "]"
-    + "\n{(0 -> Seven), (4 -> Gem), (3 -> Chip), (1 -> Bar), (2 -> Cherry)}"
+    "Output: " +
+      "[" +
+      output2[0] +
+      ", " +
+      output2[1] +
+      ", " +
+      output2[2] +
+      "]" +
+      "\n{(0 -> Seven), (4 -> Gem), (3 -> Chip), (1 -> Bar), (2 -> Cherry)}"
   );
 
   var isPayout = checkOutputForMatches(
@@ -577,8 +583,7 @@ async function spin2() {
         const slot = document.getElementById(`reel-img-${i}`);
         slot.src = newRandomImage(slot.src);
       }
-    } 
-    else if (Date.now() - start < 2000) {
+    } else if (Date.now() - start < 2000) {
       // Set first slot to the first result
       if (!isSet[0]) {
         setFinal(0, output2[0]);
@@ -625,11 +630,10 @@ async function spin2() {
           spread: 70,
           origin: { y: 0.6 },
         });
-        
+
         //The User has won
         updateWins();
-      }
-      else {
+      } else {
         //The User has lost
         updateLosses();
       }

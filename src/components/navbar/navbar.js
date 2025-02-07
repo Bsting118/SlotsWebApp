@@ -1,5 +1,5 @@
 // Begin to fetch navbar.html
-const navbarHtmlPromise = fetch("/components/navbar/navbar.html");
+const navbarHtmlPromise = fetch("/src/components/navbar/navbar.html");
 
 firebase.auth().onAuthStateChanged(async (user) => {
   // Wait for html promise to resolve
@@ -58,4 +58,3 @@ firebase.auth().onAuthStateChanged(async (user) => {
   //   window.location.replace("/login.html");
   // }
 });
-

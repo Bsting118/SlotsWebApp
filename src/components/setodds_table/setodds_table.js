@@ -1,6 +1,8 @@
 // ===================== Global constants: =====================
 // Fetch the pay table data from the server and render it to the page
-const setOddsTableHtmlPromise = fetch("/components/setodds_table/setodds_table.html");
+const setOddsTableHtmlPromise = fetch(
+  "/src/components/setodds_table/setodds_table.html"
+);
 // =============================================================
 
 // -----------------------------------------------------------------------
@@ -38,29 +40,23 @@ $(document).ready(async () => {
 
 // Resets the input fields in a given list:
 function resetInputFields(listOfTableFieldsToReset) {
-  for (let index = 0; index < listOfTableFieldsToReset.length; index++) 
-  {
+  for (let index = 0; index < listOfTableFieldsToReset.length; index++) {
     $("#" + listOfTableFieldsToReset[index]).prop("value", "");
   }
 }
 
 // Sets a new status indicating what artificial changes took place, send to a change message element with a ID
-function setChangeStatus(changeMsgID, newMessage) 
-{
+function setChangeStatus(changeMsgID, newMessage) {
   // Set the change status message:
   $("#" + changeMsgID).text(newMessage);
 }
 
-function getDictionaryLength(dictionaryObj)
-{
+function getDictionaryLength(dictionaryObj) {
   var count = 0;
 
-  if (dictionaryObj.constructor == Object)
-  {
-    for (let key in dictionaryObj)
-    {
-      if (dictionaryObj.hasOwnProperty(key))
-      {
+  if (dictionaryObj.constructor == Object) {
+    for (let key in dictionaryObj) {
+      if (dictionaryObj.hasOwnProperty(key)) {
         count++;
       }
     }
@@ -69,26 +65,23 @@ function getDictionaryLength(dictionaryObj)
   return count;
 }
 
-function cloneThisDictionary(dictionaryObj)
-{
+function cloneThisDictionary(dictionaryObj) {
   var clonedDictionary = null;
 
-  if (dictionaryObj.constructor == Object)
-  {
-    clonedDictionary = {...dictionaryObj};
+  if (dictionaryObj.constructor == Object) {
+    clonedDictionary = { ...dictionaryObj };
   }
 
   return clonedDictionary;
 }
 
-function overrideDictionary(toThisDictionary, usingThisDictionary)
-{
-  if (toThisDictionary.constructor == Object && usingThisDictionary.constructor == Object)
-  {
-    for (let key in toThisDictionary)
-    {
-      if (toThisDictionary.hasOwnProperty(key))
-      {
+function overrideDictionary(toThisDictionary, usingThisDictionary) {
+  if (
+    toThisDictionary.constructor == Object &&
+    usingThisDictionary.constructor == Object
+  ) {
+    for (let key in toThisDictionary) {
+      if (toThisDictionary.hasOwnProperty(key)) {
         toThisDictionary[key] = usingThisDictionary[key];
       }
     }
@@ -96,93 +89,85 @@ function overrideDictionary(toThisDictionary, usingThisDictionary)
 }
 
 // Tests if an input number (whose value is a string) is a positive number (can be a decimal b/c it's a %):
-function isAPositiveNumber(inputNum, includeZero = false) 
-{
-  if (includeZero) 
-  {
-    if (inputNum >= 0 && !isNaN(inputNum)) 
-    {
+function isAPositiveNumber(inputNum, includeZero = false) {
+  if (includeZero) {
+    if (inputNum >= 0 && !isNaN(inputNum)) {
       return true;
-    } 
-    else 
-    {
+    } else {
       return false;
     }
-  } 
-  else 
-  {
-    if (inputNum > 0 && !isNaN(inputNum)) 
-    {
+  } else {
+    if (inputNum > 0 && !isNaN(inputNum)) {
       return true;
-    } 
-    else 
-    {
+    } else {
       return false;
     }
   }
 }
 
-function mapOddsToSlotsDictionaryField(oddsID, valueToMap, thisOddsDictionary)
-{
-  if (isVarAString(oddsID))
-  {
-    if (oddsID.includes("cherries") && oddsID.includes("odds") )
-    {
+function mapOddsToSlotsDictionaryField(oddsID, valueToMap, thisOddsDictionary) {
+  if (isVarAString(oddsID)) {
+    if (oddsID.includes("cherries") && oddsID.includes("odds")) {
       thisOddsDictionary.Cherry = valueToMap;
-    }
-    else if (oddsID.includes("bars") && oddsID.includes("odds") )
-    {
+    } else if (oddsID.includes("bars") && oddsID.includes("odds")) {
       thisOddsDictionary.Bar = valueToMap;
-    }
-    else if (oddsID.includes("chips") && oddsID.includes("odds") )
-    {
+    } else if (oddsID.includes("chips") && oddsID.includes("odds")) {
       thisOddsDictionary.Chips = valueToMap;
-    }
-    else if (oddsID.includes("gems") && oddsID.includes("odds") )
-    {
+    } else if (oddsID.includes("gems") && oddsID.includes("odds")) {
       thisOddsDictionary.Gem = valueToMap;
-    }
-    else if (oddsID.includes("sevens") && oddsID.includes("odds") )
-    {
+    } else if (oddsID.includes("sevens") && oddsID.includes("odds")) {
       thisOddsDictionary.Seven = valueToMap;
     }
+  } else {
+    console.log(
+      "DICTIONARY-ERR: Could not map odds percentage change due to oddsID not being of type STRING."
+    );
   }
-  else
-  {
-    console.log("DICTIONARY-ERR: Could not map odds percentage change due to oddsID not being of type STRING.");
-  }
-  
 }
 
 // Attempts to change an odds percentage using the specified lookup and tag data:
-function attemptPercentOddsChange(inputValue, inputLookupID, oddsPercentDictionary, outputLookupID = null)
-{
+function attemptPercentOddsChange(
+  inputValue,
+  inputLookupID,
+  oddsPercentDictionary,
+  outputLookupID = null
+) {
   // ISSUE IS WITH inputValue.length WHICH IS FOR STRINGS; WE ARE TRYING TO PROCESS DECIMALS!!!
 
-  if (inputValue != null && inputValue.length > 0 && oddsPercentDictionary.constructor == Object) 
-  {
+  if (
+    inputValue != null &&
+    inputValue.length > 0 &&
+    oddsPercentDictionary.constructor == Object
+  ) {
     // If the percentage in the input field is non-negative or zero:
-    if (isAPositiveNumber(inputValue, true)) 
-    {
-      let decimalOddsValue = (Number(inputValue) / 100);
+    if (isAPositiveNumber(inputValue, true)) {
+      let decimalOddsValue = Number(inputValue) / 100;
 
-      if (outputLookupID != null)
-      {
+      if (outputLookupID != null) {
         let reelCount = getNumOfActiveReels();
-        const roundedDecimalOdds = roundToPrecision(permutateOdds(decimalOddsValue, reelCount), 4);
-        $("#" + outputLookupID).text(roundToPrecision(roundedDecimalOdds * 100, 4));
+        const roundedDecimalOdds = roundToPrecision(
+          permutateOdds(decimalOddsValue, reelCount),
+          4
+        );
+        $("#" + outputLookupID).text(
+          roundToPrecision(roundedDecimalOdds * 100, 4)
+        );
       }
       // Submit the input to output:
-      mapOddsToSlotsDictionaryField(inputLookupID, decimalOddsValue, oddsPercentDictionary);
+      mapOddsToSlotsDictionaryField(
+        inputLookupID,
+        decimalOddsValue,
+        oddsPercentDictionary
+      );
       // Clear the input field:
       $("#" + inputLookupID).prop("value", "");
 
       return 0; // Output completed successfully AND was parsed successfully
-    } 
-    else 
-    {
+    } else {
       console.log(
-        "ERROR-SETODDS: New set value for " + inputLookupID.toString() + " is invalid. Please ensure the provided value is >= 0."
+        "ERROR-SETODDS: New set value for " +
+          inputLookupID.toString() +
+          " is invalid. Please ensure the provided value is >= 0."
       );
       // Clear the input field:
       $("#" + inputLookupID).prop("value", "");
@@ -195,43 +180,34 @@ function attemptPercentOddsChange(inputValue, inputLookupID, oddsPercentDictiona
 }
 
 // Updates I/O operation counters regarding setting odd values:
-function updateOperationCounters(operationCounterObj, lastStatusCode)
-{
+function updateOperationCounters(operationCounterObj, lastStatusCode) {
   // If the input to output was fully successful, count both:
-  if (lastStatusCode == 0)
-  {
+  if (lastStatusCode == 0) {
     operationCounterObj.providedIns = operationCounterObj.providedIns + 1;
     operationCounterObj.successfulOuts = operationCounterObj.successfulOuts + 1;
   }
   // Else if the input was at least there, but failed somehow, count only input:
-  else if (lastStatusCode != -1)
-  {
+  else if (lastStatusCode != -1) {
     operationCounterObj.providedIns = operationCounterObj.providedIns + 1;
   }
 }
 
-function areNewPercentsOutOf100(newPercentsDict, usingDecimalPercents = false)
-{
+function areNewPercentsOutOf100(newPercentsDict, usingDecimalPercents = false) {
   var result = false;
   let total = 0;
 
-  if (newPercentsDict.constructor == Object)
-  {
+  if (newPercentsDict.constructor == Object) {
     for (let key in newPercentsDict) {
       if (newPercentsDict.hasOwnProperty(key)) {
-          total += newPercentsDict[key];
+        total += newPercentsDict[key];
       }
     }
-    
-    if (usingDecimalPercents)
-    {
-      result = (total == 1) ? true : false;
+
+    if (usingDecimalPercents) {
+      result = total == 1 ? true : false;
+    } else {
+      result = total == 100 ? true : false;
     }
-    else
-    {
-      result = (total == 100) ? true : false;
-    }
-    
   }
   return result;
 }
@@ -252,42 +228,73 @@ function changeOddsInAlgorithm(
   strGemOutID = null,
   strSevenOutID = null,
   strSingleCherryOutID = null
-) 
-{
+) {
   // Fetch all input field content from SET PAYS table currently there:
-  const cherryInpPercent = strCherryInpID != null ? $("#" + strCherryInpID).val() : null;
+  const cherryInpPercent =
+    strCherryInpID != null ? $("#" + strCherryInpID).val() : null;
   const barInpPercent = strBarInpID != null ? $("#" + strBarInpID).val() : null;
-  const chipInpPercent = strChipInpID != null ? $("#" + strChipInpID).val() : null;
+  const chipInpPercent =
+    strChipInpID != null ? $("#" + strChipInpID).val() : null;
   const gemInpPercent = strGemInpID != null ? $("#" + strGemInpID).val() : null;
-  const sevenInpPercent = strSevenInpID != null ? $("#" + strSevenInpID).val() : null;
+  const sevenInpPercent =
+    strSevenInpID != null ? $("#" + strSevenInpID).val() : null;
 
   const clonedOddsDictionary = cloneThisDictionary(symbolOddsDictionary); // {...symbolOddsDictionary};
-  
+
   // Have a counter that counts operations completed; if (total # of inputs != total # of successful outputs), then change message should = unsuccessful, else, successful
-  var ioCounter = {providedIns: 0, successfulOuts: 0}; // Object-counter
+  var ioCounter = { providedIns: 0, successfulOuts: 0 }; // Object-counter
 
   /* Check what should and should NOT be updated; based on input being present (length isn't default of none/0-length + null checks): */
   // Cherries:
-  let cherryStatusCode = attemptPercentOddsChange(cherryInpPercent, strCherryInpID, clonedOddsDictionary, strCherryOutID);
-  if (cherryStatusCode == 0)
-  {
+  let cherryStatusCode = attemptPercentOddsChange(
+    cherryInpPercent,
+    strCherryInpID,
+    clonedOddsDictionary,
+    strCherryOutID
+  );
+  if (cherryStatusCode == 0) {
     // Parse the single cherry odds if the set of cherries is valid:
-    let cherryDecimalOddsValue = (Number(cherryInpPercent) / 100);
-    const roundedCherryDecimalOdds = roundToPrecision(permutateOdds(cherryDecimalOddsValue, 1), 4);
-    $("#" + strSingleCherryOutID).text(roundToPrecision(roundedCherryDecimalOdds * 100, 4));
+    let cherryDecimalOddsValue = Number(cherryInpPercent) / 100;
+    const roundedCherryDecimalOdds = roundToPrecision(
+      permutateOdds(cherryDecimalOddsValue, 1),
+      4
+    );
+    $("#" + strSingleCherryOutID).text(
+      roundToPrecision(roundedCherryDecimalOdds * 100, 4)
+    );
   }
 
   // Bars:
-  let barStatusCode = attemptPercentOddsChange(barInpPercent, strBarInpID, clonedOddsDictionary, strBarOutID);
+  let barStatusCode = attemptPercentOddsChange(
+    barInpPercent,
+    strBarInpID,
+    clonedOddsDictionary,
+    strBarOutID
+  );
 
   // Chips:
-  let chipStatusCode = attemptPercentOddsChange(chipInpPercent, strChipInpID, clonedOddsDictionary, strChipOutID);
+  let chipStatusCode = attemptPercentOddsChange(
+    chipInpPercent,
+    strChipInpID,
+    clonedOddsDictionary,
+    strChipOutID
+  );
 
   // Gems:
-  let gemStatusCode = attemptPercentOddsChange(gemInpPercent, strGemInpID, clonedOddsDictionary, strGemOutID);
+  let gemStatusCode = attemptPercentOddsChange(
+    gemInpPercent,
+    strGemInpID,
+    clonedOddsDictionary,
+    strGemOutID
+  );
 
   // Sevens:
-  let sevenStatusCode = attemptPercentOddsChange(sevenInpPercent, strSevenInpID, clonedOddsDictionary, strSevenOutID);
+  let sevenStatusCode = attemptPercentOddsChange(
+    sevenInpPercent,
+    strSevenInpID,
+    clonedOddsDictionary,
+    strSevenOutID
+  );
 
   // Sum the total percentage in the test/temp. dictionary:
   var isValidPercentTotal = areNewPercentsOutOf100(clonedOddsDictionary, true);
@@ -299,22 +306,25 @@ function changeOddsInAlgorithm(
   updateOperationCounters(ioCounter, sevenStatusCode);
 
   // Adjust CHANGE status based on success rate:
-  if (isValidPercentTotal && (ioCounter.providedIns == ioCounter.successfulOuts)) 
-  {
+  if (
+    isValidPercentTotal &&
+    ioCounter.providedIns == ioCounter.successfulOuts
+  ) {
     // symbolOddsDictionary = clonedOddsDictionary;
-    overrideDictionary(symbolOddsDictionary, clonedOddsDictionary)
+    overrideDictionary(symbolOddsDictionary, clonedOddsDictionary);
     setChangeStatus("setodds_chng_success", "Changes were successful!");
-  } 
-  else 
-  {
-    setChangeStatus("setodds_chng_success", "Changes failed. Percentages must be positive numbers and add up to 100%.");
+  } else {
+    setChangeStatus(
+      "setodds_chng_success",
+      "Changes failed. Percentages must be positive numbers and add up to 100%."
+    );
   }
 }
 
 // This manages the parameters sent to the CHANGE button function; this is what is attached to the button foremost:
 function changeOddsButtonHandler() {
   let chosenAlgorithmNum = checkAlgorithmSelection();
-  
+
   changeOddsInAlgorithm(
     PerSymbolOdds,
     "cherries_odds",
@@ -334,15 +344,17 @@ function changeOddsButtonHandler() {
 
 function checkAlgorithmSelection() {
   // Get the selected/checked algorithm radio button:
-  var checkedAlgorithmRadioButton = document.querySelector('input[type=radio][name="algorithm"]:checked');
+  var checkedAlgorithmRadioButton = document.querySelector(
+    'input[type=radio][name="algorithm"]:checked'
+  );
   // Get the radio button number of the chosen algorithm button:
-  let selectedButtonNumber = checkedAlgorithmRadioButton.value; 
+  let selectedButtonNumber = checkedAlgorithmRadioButton.value;
   // Store the correct spin function to call from home.js using the selected button number:
   const spinFunctionToUse = "spin" + selectedButtonNumber + "()";
 
   // Set the "onclick=" property of the SPIN button to this chosen algorithm spin function:
   let mainSpinButton = document.getElementById("spin");
-  mainSpinButton.setAttribute('onclick', spinFunctionToUse);
-  
+  mainSpinButton.setAttribute("onclick", spinFunctionToUse);
+
   return selectedButtonNumber;
 }
