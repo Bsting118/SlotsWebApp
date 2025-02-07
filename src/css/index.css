@@ -1,0 +1,274 @@
+@font-face 
+{
+  font-family: "Jackpot";
+  src: 
+    url("/assets/fonts/jackpot/Jackpot.ttf") format('truetype');
+}
+
+html
+{
+    height: 100%;
+}
+
+body
+{
+    background: linear-gradient(#001510 70%, #00BF8F);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 
+{
+    font-family: 'Jackpot', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+h2 
+{
+    font-family: 'Jackpot', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+#about-image1
+{
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.col-div1 
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.col-div2
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 4rem;
+    margin-top: 2rem;
+}
+
+.center-div
+{
+    text-align: center;
+    justify-content: center;
+}
+
+/* ---GROUP Styling for the slots overall interface--- */
+.slots_interface
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.interface_icon
+{
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.button_container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-content: flex-start;
+    row-gap: 25%;
+    /*transform: translateX(-30%);*/
+}
+
+.button_container_2
+{
+    display: flex;
+    flex-direction: row;
+    background-color: darkslategray;
+    margin-top: -1px;
+    padding: 1em;
+    /*Change only bottom edge radius so top background can connect to slot container:*/
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width: 90%;
+    justify-content: space-evenly;
+}
+
+.neon_button
+{
+    box-sizing: border-box;
+    font-family: 'Jackpot', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: x-large;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    color: #FFBB00;
+    background: #111ECC;
+    text-decoration: none;
+    border: #632DFD 0.125em solid;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 0.25em 1em;
+    text-shadow: 0 0 .20em #FFF7, 
+                 0 0 .30em #632DFD;
+    box-shadow: inset 0 0 0.5em #632DFD,
+                0 0 0.5em #632DFD;
+}
+
+.neon_button::before
+{
+    content: "";
+    position: absolute;
+    top: 140%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /*Toggle surface glow: SET TO OFF */
+    /*---------------------------------*/
+    /*background: #632DFD;
+    transform: perspective(0.2em) rotateX(10deg) scale(1.3, 0.40);
+    filter: blur(0.5em);
+    opacity: 0.6;*/
+    /*---------------------------------*/
+    pointer-events: none;
+    transition: opacity 100ms linear;
+}
+
+.neon_button::after 
+{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #632DFD;
+    box-shadow: 0 0 2em #632DFD;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 100ms linear;
+}
+
+.neon_button:hover::after
+{
+    opacity: 1;
+}
+
+.neon_button:hover, .neon_button:focus 
+{
+    color: white;
+}
+
+.neon_button:hover::before
+{
+    opacity: 0.8;
+}
+
+.help_icon
+{
+    cursor: pointer;
+    max-width: 50%;
+    max-height: 50%;
+    transition: 100ms linear;
+}
+
+.help_icon:hover
+{
+    transform: scale(1.1);
+    transition: 100ms linear;
+}
+
+/* Styling for the overall machine */
+.container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 10%;
+}
+
+/* Styling for slot machine flexbox */
+.machine_display
+{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    background-color: darkslategray;
+    padding: 1rem;
+    width: 90%;
+    text-align: center;
+    /*Leave bottom borders sharp-edged so can connect to bottom button container(s):*/
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* Styling for slot reel columns */
+.reel
+{
+    background-color: #160F21;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #51aaa3;
+    transition: border-color 400ms;
+    border-radius: 7.5px;
+    /* padding: 8rem 4rem; */
+    width: 16em;
+    height: 24em;
+    position: relative;
+}
+
+/* Styling for slot reel symbols */
+.symbol
+{
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+/* Styling for Vecteezy Attribution Link (make it less ugly) */
+.icons-attribution
+{
+    text-align: center;
+    background-color: darkslategray;
+    width: 100%;
+    color: #160F21;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+}
+
+.img-center
+{
+    text-align: center;
+    justify-content: center;
+}
+
+.a:link
+{
+    text-decoration: none;
+}
+
+.icons-attribution:link 
+{
+    text-decoration: none;
+}
+
+.icons-attribution:visited
+{
+    text-decoration: none;
+}
+
+.icons-attribution:hover 
+{
+    text-decoration: none;
+}
+
+.icons-attribution:active
+{
+    text-decoration: none;
+}

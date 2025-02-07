@@ -1,0 +1,79 @@
+<div>
+  <table class="table" style="text-align: center; vertical-align: middle">
+    <!-- Header Row -->
+    <tr>
+      <th>Pay Symbol</th>
+      <th>% Odds</th>
+    </tr>
+
+    <!-- Per Cherry -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_Cherry.png" style="height: 8em" />
+        <!-- <img src="/assets/icons/Stylized_Cherry.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_Cherry.png" style="height: 8em" /> -->
+      </td>
+      <td><input type="number" min="0" max="100" id="cherries_odds">&nbsp;%</td>
+    </tr>
+
+    <!-- Per Bar -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_BAR.png" style="height: 8em" />
+        <!-- <img src="/assets/icons/Stylized_BAR.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_BAR.png" style="height: 8em" /> -->
+      </td>
+      <td><input type="number" min="0" max="100" id="bars_odds">&nbsp;%</td>
+    </tr>
+
+    <!-- Per Chip -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_Chips.png" style="height: 8em" />
+        <!-- <img src="/assets/icons/Stylized_Chips.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_Chips.png" style="height: 8em" /> -->
+      </td>
+      <td><input type="number" min="0" max="100" id="chips_odds">&nbsp;%</td>
+    </tr>
+
+    <!-- Per Gem -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_GEM.png" style="height: 8em" />
+        <!-- <img src="/assets/icons/Stylized_GEM.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_GEM.png" style="height: 8em" /> -->
+      </td>
+      <td><input type="number" min="0" max="100" id="gems_odds">&nbsp;%</td>
+    </tr>
+
+    <!-- Per 7 -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_7.png" style="height: 8em" />
+        <!-- <img src="/assets/icons/Stylized_7.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_7.png" style="height: 8em" /> -->
+      </td>
+      <td><input type="number" min="0" max="100" id="sevens_odds">&nbsp;%</td>
+    </tr>
+  </table>
+
+  <!--Algorithm radio buttons for technicians-->
+  <fieldset>
+
+    <div>
+      <input type="radio" id="alg_1" name="algorithm" value="1" checked />
+      <label for="alg_1">Algorithm V1</label>
+    </div>
+
+    <div>
+      <input type="radio" id="alg_2" name="algorithm" value="2" />
+      <label for="alg_2">Algorithm V2</label>
+    </div>
+  </fieldset>
+
+  <!--CHANGE button in the bottom left of the pop-up:-->
+  <div class="button_container_3">
+    <p class="stylized-text" id="setodds_chng_success"></p><a class="neon_button" id="setodds_chng_btn"
+      onclick="changeOddsButtonHandler()">CHANGE</a>
+  </div>
+</div>
