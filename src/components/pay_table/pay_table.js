@@ -1,6 +1,6 @@
 // ===================== Global constants: =====================
 // Fetch the pay table data from the server and render it to the page
-const payTableHtmlPromise = fetch("/src/components/pay_table/pay_table.html");
+const payTableHtmlPromise = fetch("components/pay_table/pay_table.html");
 // =============================================================
 
 // -----------------------------------------------------------------------

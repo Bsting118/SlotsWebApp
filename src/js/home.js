@@ -68,11 +68,11 @@ var SymbolPays = {
 // ===================== Global Arrays/Lists: =====================
 // These indicies should match the Results enum
 const Images = [
-  "/src/assets/icons/Stylized_7.png",
-  "/src/assets/icons/Stylized_BAR.png",
-  "/src/assets/icons/Stylized_Cherry.png",
-  "/src/assets/icons/Stylized_Chips.png",
-  "/src/assets/icons/Stylized_GEM.png",
+  "assets/icons/Stylized_7.png",
+  "assets/icons/Stylized_BAR.png",
+  "assets/icons/Stylized_Cherry.png",
+  "assets/icons/Stylized_Chips.png",
+  "assets/icons/Stylized_GEM.png",
 ];
 
 // How many times a symbol should appear within the RNG's set:
