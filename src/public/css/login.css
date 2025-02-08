@@ -1,0 +1,98 @@
+@font-face 
+{
+  font-family: "Jackpot";
+  src: 
+    url("/assets/fonts/jackpot/Jackpot.ttf") format('truetype');
+}
+
+html
+{
+  height: 100%;
+}
+
+body 
+{
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body 
+{
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  /*background-color: #f5f5f5; */
+  background: linear-gradient(#001510 50%, #00BF8F);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#signin-header1
+{
+  font-family: 'Jackpot', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: White;
+}
+
+#info-text1
+{
+  font-family: 'Jackpot', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: White;
+}
+
+#info-text2
+{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: White;
+  text-align: left;
+}
+
+a:link 
+{
+    text-decoration: none;
+}
+
+a
+{
+  color: #FFBB00;
+}
+
+a:hover 
+{
+  color: #d19900;
+}
+
+.form-signin 
+{
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox 
+{
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within 
+{
+  z-index: 2;
+} 
+
+.bd-placeholder-img 
+{
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) 
+{
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}

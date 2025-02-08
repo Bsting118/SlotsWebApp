@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slots Game</title>
+
+  <!-- JQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="js/firebase.js"></script>
+
+  <!-- Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+
+  <!-- Nav Bar -->
+  <script src="/components/navbar/navbar.js"></script>
+
+  <!-- Page-specific js -->
+  <script src="js/home.js" defer></script>
+
+  <!-- Pay scale component -->
+  <script src="/components/pay_table/pay_table.js"></script>
+
+  <!-- Set Pays component -->
+  <script src="/components/setpays_table/setpays_table.js"></script>
+
+  <!-- Set Odds component -->
+  <script src="/components/setodds_table/setodds_table.js"></script>
+
+  <!--Page-specific css-->
+  <link href="css/home.css" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Navbar Placeholder -->
+  <div id="navbar-template" class="navbar-dark bg-dark" style="height: 56px"></div>
+
+  <div class="modal fade" id="pay_table_modal" tabindex="-1" data-bs-theme="dark">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Pay Table</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="pay-table"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="setpays_table_modal" tabindex="-1" data-bs-theme="dark">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Set Pays Table</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="setpays-table"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="setodds_table_modal" tabindex="-1" data-bs-theme="dark">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Set Odds Table</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="setodds-table"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slots_interface">
+    <div class="container">
+      <div class="machine_display">
+        <div id="slot-0" class="reel">
+          <img id="reel-img-0" class="symbol 1" src="/assets/icons/Stylized_BAR.png" />
+        </div>
+        <div id="slot-1" class="reel">
+          <img id="reel-img-1" class="symbol 2" src="/assets/icons/Stylized_7.png" />
+        </div>
+        <div id="slot-2" class="reel">
+          <img id="reel-img-2" class="symbol 3" src="/assets/icons/Stylized_Cherry.png" />
+        </div>
+
+        <div class="button_container">
+          <img class="help_icon" src="/assets/icons/Stylized_HELP.png" data-bs-toggle="modal"
+            data-bs-target="#pay_table_modal" />
+          <button id="spin" class="neon_button" onclick="spin1()">SPIN</button>
+          <div class="button_container">
+            <p class="credits_font">Your Credits: <span id="credits">...</span></p>
+            <div class="button_container_3">
+              <button class="bet_button active" onclick="setBet(1)">1cr</button>
+              <button class="bet_button" onclick="setBet(2)">2cr</button>
+              <button class="bet_button" onclick="setBet(3)">3cr</button>
+            </div>
+            <p></p>
+            <p class="credits_font">Credits Won: <span id="creditsWon"></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!--Add in SET ODDS and SET PAYS buttons at bottom of machine container-->
+      <div class="button_container_2">
+        <button class="neon_button" data-bs-toggle="modal" data-bs-target="#setodds_table_modal">SET ODDS</button>
+        <button class="neon_button" data-bs-toggle="modal" data-bs-target="#setpays_table_modal">SET PAYS</button>
+        <p class="error-text" id="credits_error_msg">ERR: Insufficient credits for bet.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <a href="https://www.vecteezy.com/free-vector/slot-machine-icon" class="icons-attribution">Slot Machine Icon Vectors
+    by Vecteezy</a>
+</body>
+
+</html>

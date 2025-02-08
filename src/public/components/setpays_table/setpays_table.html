@@ -1,0 +1,65 @@
+<div>
+  <table class="table" style="text-align: center; vertical-align: middle">
+    <!-- Header Row -->
+    <tr>
+      <th>Matching Pay Sets</th>
+      <th>Payout</th>
+    </tr>
+
+    <!-- Three Cherries -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_Cherry.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_Cherry.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_Cherry.png" style="height: 8em" />
+      </td>
+      <td><input type="number" min="0" step="1" id="cherries_value">&nbsp;cr.</td>
+    </tr>
+
+    <!-- Three Bars -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_BAR.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_BAR.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_BAR.png" style="height: 8em" />
+      </td>
+      <td><input type="number" min="0" step="1" id="bars_value">&nbsp;cr.</td>
+    </tr>
+
+    <!-- Three Chips -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_Chips.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_Chips.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_Chips.png" style="height: 8em" />
+      </td>
+      <td><input type="number" min="0" step="1" id="chips_value">&nbsp;cr.</td>
+    </tr>
+
+    <!-- Three GEMS -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_GEM.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_GEM.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_GEM.png" style="height: 8em" />
+      </td>
+      <td><input type="number" min="0" step="1" id="gems_value">&nbsp;cr.</td>
+    </tr>
+
+    <!-- Three 7s -->
+    <tr>
+      <td>
+        <img src="/assets/icons/Stylized_7.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_7.png" style="height: 8em" />
+        <img src="/assets/icons/Stylized_7.png" style="height: 8em" />
+      </td>
+      <td><input type="number" min="0" step="1" id="sevens_value">&nbsp;cr.</td>
+    </tr>
+  </table>
+
+  <!--CHANGE button in the bottom left of the pop-up:-->
+  <div class="button_container_3">
+    <p class="stylized-text" id="setpays_chng_success"></p><a class="neon_button" id="setpays_chng_btn"
+      onclick="changePaysButtonHandler()">CHANGE</a>
+  </div>
+</div>
