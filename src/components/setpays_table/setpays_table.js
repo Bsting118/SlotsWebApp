@@ -1,7 +1,7 @@
 // ===================== Global constants: =====================
 // Fetch the pay table data from the server and render it to the page
 const setPaysTableHtmlPromise = fetch(
-  "components/setpays_table/setpays_table.html"
+  "/components/setpays_table/setpays_table.html"
 );
 // =============================================================
 
