@@ -2,7 +2,7 @@
 {
   font-family: "Jackpot";
   src: 
-    url("/src/assets/fonts/jackpot/Jackpot.ttf") format('truetype');
+    url("assets/fonts/jackpot/Jackpot.ttf") format('truetype');
 }
 
 html
